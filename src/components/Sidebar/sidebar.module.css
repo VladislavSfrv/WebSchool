@@ -1,0 +1,182 @@
+.sidebar {
+    width: 228px;
+    flex: 0 0 228px;
+    background: #202220;
+    border-right: 1px solid #343633;
+    padding: 29px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    max-height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+.brand {
+    color: #f6f5ef;
+    text-decoration: none;
+    font: 700 21px/1 var(--heading);
+    letter-spacing: -1px;
+    margin: 0 12px 67px;
+}
+
+.brand_mark {
+    display: inline-grid;
+    place-items: center;
+    color: #151614;
+    background: var(--lime);
+    width: 22px;
+    height: 22px;
+    margin-right: 7px;
+    font: 800 20px/1 var(--mono);
+}
+
+.sidebar_label {
+    color: #8f948a;
+    font: 700 10px/1.2 var(--mono);
+    letter-spacing: 1.2px;
+}
+
+.main_nav {
+    display: grid;
+    gap: 4px;
+}
+
+.nav_item {
+    color: #959a91;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 42px;
+    padding: 0 12px;
+    text-decoration: none;
+    font-size: 13px;
+    position: relative;
+}
+
+.nav_item:hover,
+.nav_item.active {
+    color: #f7f5ed;
+    background: #2b2e2a;
+}
+
+.nav_item.active svg {
+    color: var(--lime);
+}
+
+.sidebar_label {
+    margin: 0 13px 14px;
+}
+
+.progress_label {
+    margin-top: 59px;
+}
+
+.sidebar_progress {
+    border-top: 1px solid #373a36;
+    border-bottom: 1px solid #373a36;
+    padding: 17px 12px 20px;
+
+    p {
+        color: #aeb1a9;
+        font-size: 11px;
+        line-height: 1.5;
+        margin: 0;
+    }
+}
+
+.progress_ring {
+    border: 1px solid var(--lime);
+    border-radius: 50%;
+    width: 76px;
+    height: 76px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    box-shadow: 0 0 0 5px rgba(202, 255, 72, .08);
+
+    strong {
+        font: 700 20px/1 var(--heading);
+        color: var(--lime);
+    }
+
+    span {
+        color: #9da398;
+        font-size: 10px;
+        margin-top: 4px;
+    }
+}
+
+.sidebar_bottom {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #e7e7df;
+    font-size: 11px;
+
+    strong,
+    small {
+        display: block;
+    }
+
+    small {
+        color: #8c928a;
+        margin-top: 2px;
+        font-size: 9px;
+    }
+
+    svg {
+        margin-left: auto;
+        color: #888e85;
+    }
+}
+
+.avatar {
+    display: grid;
+    place-items: center;
+    width: 29px;
+    height: 29px;
+    border-radius: 50%;
+    background: #db755e;
+    color: #211d19;
+    font: 700 10px var(--mono);
+}
+
+@media (max-width: 850px) {
+    .sidebar {
+        width: 70px;
+        flex-basis: 70px;
+        padding: 24px 10px;
+        align-items: center;
+    }
+
+    .brand {
+        margin: 0 0 52px;
+        font-size: 0;
+    }
+
+    .brand_mark {
+        margin: 0;
+    }
+
+    .sidebar_label,
+    .nav_item:not(.active) svg,
+    .nav_item:not(.active),
+    .progress_label,
+    .sidebar_progress,
+    .sidebar_bottom>span:not(.avatar),
+    .sidebar_bottom svg {
+        display: none;
+    }
+
+    .nav_item.active {
+        padding: 11px;
+    }
+
+    .sidebar_bottom {
+        margin-top: auto;
+    }
+}

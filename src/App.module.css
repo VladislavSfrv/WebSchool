@@ -1,0 +1,6 @@
+.app_shell {
+    min-height: 100vh;
+    display: flex;
+    background: #171817;
+    color: #f1f0e9;
+}

@@ -1,0 +1,31 @@
+:root {
+  --lime: #caff48;
+  --heading: 'Trebuchet MS', 'Segoe UI', sans-serif;
+  --mono: 'Courier New', monospace;
+  font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+  color: #f1f0e9;
+  background: #171817;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.eyebrow {
+  color: #8f948a;
+  font: 700 10px/1.2 var(--mono);
+  letter-spacing: 1.2px;
+}
