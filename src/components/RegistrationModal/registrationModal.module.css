@@ -1,2 +1,248 @@
- .modal_backdrop { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: 24px; background: rgba(9,10,9,.78); backdrop-filter: blur(6px); }.registration_modal { width: min(780px,100%); display: grid; grid-template-columns: .9fr 1.1fr; position: relative; background: #252824; border: 1px solid #4a5143; box-shadow: 0 24px 80px rgba(0,0,0,.4); }.modal_close { position: absolute; top: 17px; right: 17px; z-index: 1; border: 0; background: transparent; color: #aab0a4; cursor: pointer; padding: 5px; }.modal_close:hover { color: var(--lime); }.modal_intro { padding: 48px 38px; background: #30382a; border-right: 1px solid #4a5143; }.modal_mark { display: grid; place-items: center; width: 30px; height: 30px; margin-bottom: 65px; background: var(--lime); color: #181b17; font: 800 25px/1 var(--mono); }.modal_intro h2, .success_state h2 { color: #f4f3eb; font: 400 38px/.98 var(--heading); letter-spacing: -2px; margin: 18px 0 17px; }.modal_intro h2 em { color: var(--lime); font-style: normal; }.modal_intro > p:last-child { color: #aeb5a6; font-size: 12px; line-height: 1.55; }.registration_form { padding: 43px 40px 33px; }.registration_form label { display: block; color: #a8aea3; font: 10px var(--mono); margin-bottom: 17px; }.registration_form input[type='text'], .registration_form input[type='email'], .password_field { display: flex; width: 100%; margin-top: 7px; padding: 11px 0; border: 0; border-bottom: 1px solid #555c50; outline: 0; background: transparent; color: #f4f2e9; font: 13px var(--heading); }.registration_form input::placeholder { color: #697167; }.registration_form input:focus { border-color: var(--lime); }.password_field input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: #f4f2e9; font: 13px var(--heading); }.password_field button { border: 0; background: transparent; color: #8d9589; cursor: pointer; }.agreement { display: flex !important; align-items: flex-start; gap: 9px; line-height: 1.45; margin: 26px 0 23px !important; }.agreement input { accent-color: var(--lime); margin-top: 1px; }.agreement a, .login_hint button { color: var(--lime); }.submit_button { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 14px 17px; border: 0; background: var(--lime); color: #171a15; font: 700 12px var(--heading); cursor: pointer; }.submit_button:hover, .primary_button:hover { background: #e1ff9e; }.login_hint { text-align: center; color: #7e877a; font-size: 10px; margin: 19px 0 0; }.login_hint button { border: 0; background: transparent; padding: 0; cursor: pointer; font-size: inherit; }.success_state { min-height: 430px; padding: 70px 55px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }.success_icon { display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 27px; color: #161916; background: var(--lime); border-radius: 50%; }.success_state > p:not(.eyebrow) { color: #aeb5a6; font-size: 13px; line-height: 1.5; }.primary_button { display: inline-flex; align-items: center; gap: 17px; margin-top: 27px; border: 0; padding: 14px 17px 14px 19px; background: var(--lime); color: #151614; font: 700 12px var(--heading); cursor: pointer; }.primary_button:hover { background: #e1ff9e; }
-@media (max-width: 650px) { .registration_modal { grid-template-columns: 1fr; max-height: calc(100vh - 32px); overflow-y: auto; }.modal_intro { padding: 32px 28px 27px; border-right: 0; border-bottom: 1px solid #4a5143; }.modal_mark { margin-bottom: 27px; }.modal_intro h2 { font-size: 31px; }.registration_form { padding: 30px 28px 27px; }.success_state { min-height: 360px; padding: 45px 28px; } }
+ .modal_backdrop {
+     position: fixed;
+     inset: 0;
+     z-index: 10;
+     display: grid;
+     place-items: center;
+     padding: 24px;
+     background: rgba(9, 10, 9, .78);
+     backdrop-filter: blur(6px);
+ }
+
+ .registration_modal {
+     width: min(780px, 100%);
+     display: grid;
+     grid-template-columns: .9fr 1.1fr;
+     position: relative;
+     background: #252824;
+     border: 1px solid #4a5143;
+     box-shadow: 0 24px 80px rgba(0, 0, 0, .4);
+ }
+
+ .modal_close {
+     position: absolute;
+     top: 17px;
+     right: 17px;
+     z-index: 1;
+     border: 0;
+     background: transparent;
+     color: #aab0a4;
+     cursor: pointer;
+     padding: 5px;
+ }
+
+ .modal_close:hover {
+     color: var(--lime);
+ }
+
+ .modal_intro {
+     padding: 48px 38px;
+     background: #30382a;
+     border-right: 1px solid #4a5143;
+ }
+
+ .modal_mark {
+     display: grid;
+     place-items: center;
+     width: 30px;
+     height: 30px;
+     margin-bottom: 65px;
+     background: var(--lime);
+     color: #181b17;
+     font: 800 25px/1 var(--mono);
+ }
+
+ .modal_intro h2,
+ .success_state h2 {
+     color: #f4f3eb;
+     font: 400 38px/.98 var(--heading);
+     letter-spacing: -2px;
+     margin: 18px 0 17px;
+ }
+
+ .modal_intro h2 em {
+     color: var(--lime);
+     font-style: normal;
+ }
+
+ .modal_intro>p:last-child {
+     color: #aeb5a6;
+     font-size: 14px;
+     line-height: 1.55;
+ }
+
+ .registration_form {
+     padding: 43px 40px 33px;
+ }
+
+ .registration_form label {
+     display: block;
+     color: #a8aea3;
+     font: 12px var(--mono);
+     margin-bottom: 17px;
+ }
+
+ .registration_form input[type='text'],
+ .registration_form input[type='email'],
+ .password_field {
+     display: flex;
+     width: 100%;
+     margin-top: 7px;
+     padding: 11px 0;
+     border: 0;
+     border-bottom: 1px solid #555c50;
+     outline: 0;
+     background: transparent;
+     color: #f4f2e9;
+     font: 13px var(--heading);
+ }
+
+ .registration_form input::placeholder {
+     color: #697167;
+ }
+
+ .registration_form input:focus {
+     border-color: var(--lime);
+ }
+
+ .password_field input {
+     flex: 1;
+     min-width: 0;
+     border: 0;
+     outline: 0;
+     background: transparent;
+     color: #f4f2e9;
+     font: 13px var(--heading);
+ }
+
+ .password_field button {
+     border: 0;
+     background: transparent;
+     color: #8d9589;
+     cursor: pointer;
+ }
+
+ .agreement {
+     display: flex !important;
+     align-items: flex-start;
+     gap: 9px;
+     line-height: 1.45;
+     margin: 26px 0 23px !important;
+ }
+
+ .agreement input {
+     accent-color: var(--lime);
+     margin-top: 1px;
+ }
+
+ .agreement a,
+ .login_hint button {
+     color: var(--lime);
+ }
+
+ .submit_button {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     width: 100%;
+     padding: 14px 17px;
+     border: 0;
+     background: var(--lime);
+     color: #171a15;
+     font: 700 12px var(--heading);
+     cursor: pointer;
+ }
+
+ .submit_button:hover,
+ .primary_button:hover {
+     background: #e1ff9e;
+ }
+
+ .login_hint {
+     text-align: center;
+     color: #7e877a;
+     font-size: 14px;
+     margin: 19px 0 0;
+ }
+
+ .login_hint button {
+     border: 0;
+     background: transparent;
+     padding: 0;
+     cursor: pointer;
+     font-size: inherit;
+ }
+
+ .success_state {
+     min-height: 430px;
+     padding: 70px 55px;
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+     justify-content: center;
+ }
+
+ .success_icon {
+     display: grid;
+     place-items: center;
+     width: 44px;
+     height: 44px;
+     margin-bottom: 27px;
+     color: #161916;
+     background: var(--lime);
+     border-radius: 50%;
+ }
+
+ .success_state>p:not(.eyebrow) {
+     color: #aeb5a6;
+     font-size: 16px;
+     line-height: 1.5;
+ }
+
+ .primary_button {
+     display: inline-flex;
+     align-items: center;
+     gap: 17px;
+     margin-top: 27px;
+     border: 0;
+     padding: 14px 17px 14px 19px;
+     background: var(--lime);
+     color: #151614;
+     font: 700 12px var(--heading);
+     cursor: pointer;
+ }
+
+ .primary_button:hover {
+     background: #e1ff9e;
+ }
+
+ @media (max-width: 650px) {
+     .registration_modal {
+         grid-template-columns: 1fr;
+         max-height: calc(100vh - 32px);
+         overflow-y: auto;
+     }
+
+     .modal_intro {
+         padding: 32px 28px 27px;
+         border-right: 0;
+         border-bottom: 1px solid #4a5143;
+     }
+
+     .modal_mark {
+         margin-bottom: 27px;
+     }
+
+     .modal_intro h2 {
+         font-size: 31px;
+     }
+
+     .registration_form {
+         padding: 30px 28px 27px;
+     }
+
+     .success_state {
+         min-height: 360px;
+         padding: 45px 28px;
+     }
+ }

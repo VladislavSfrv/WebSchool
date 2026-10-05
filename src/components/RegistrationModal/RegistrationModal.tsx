@@ -4,9 +4,10 @@ import styles from "./registrationModal.module.css";
 
 type RegistrationModalProps = {
   onClose: () => void;
+  onSuccess?: () => void;
 };
 
-export function RegistrationModal({ onClose }: RegistrationModalProps) {
+export function RegistrationModal({ onClose, onSuccess }: RegistrationModalProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -47,7 +48,14 @@ export function RegistrationModal({ onClose }: RegistrationModalProps) {
               почту
             </h2>
             <p>Мы отправили письмо с подтверждением на указанный адрес.</p>
-            <button className={styles.primary_button} type="button" onClick={onClose}>
+            <button
+              className={styles.primary_button}
+              type="button"
+              onClick={() => {
+                onSuccess?.();
+                onClose();
+              }}
+            >
               Вернуться в кабинет <ArrowUpRight size={17} />
             </button>
           </div>
