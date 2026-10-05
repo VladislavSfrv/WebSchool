@@ -1,3 +1,68 @@
- .topbar { height: 74px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #343633; }
-.breadcrumb { color: #91968d; font-size: 11px; }.breadcrumb span { color: #61665e; margin: 0 8px; }.top_actions { display: flex; align-items: center; gap: 8px; color: #91968d; font-size: 10px; }.icon_button { color: #d7d8ce; border: 0; background: transparent; display: grid; place-items: center; padding: 4px; margin-right: 13px; }.online_dot { width: 6px; height: 6px; background: var(--lime); border-radius: 50%; }.register_trigger { display: inline-flex; align-items: center; gap: 7px; border: 1px solid #59604f; background: transparent; color: var(--lime); padding: 8px 11px; cursor: pointer; font: 10px var(--mono); }.register_trigger:hover { background: #30372b; }
-@media (max-width: 520px) { .topbar { height: 60px; }.online_text { display: none; } }
+ .topbar {
+     height: 74px;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     border-bottom: 1px solid #343633;
+ }
+
+ .breadcrumb {
+     color: #91968d;
+     font-size: 11px;
+ }
+
+ .breadcrumb span {
+     color: #61665e;
+     margin: 0 8px;
+ }
+
+ .top_actions {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     color: #91968d;
+     font-size: 10px;
+ }
+
+ .icon_button {
+     color: #d7d8ce;
+     border: 0;
+     background: transparent;
+     display: grid;
+     place-items: center;
+     padding: 4px;
+     margin-right: 13px;
+ }
+
+ .online_dot {
+     width: 6px;
+     height: 6px;
+     background: var(--lime);
+     border-radius: 50%;
+ }
+
+ .register_trigger {
+     display: inline-flex;
+     align-items: center;
+     gap: 7px;
+     border: 1px solid #59604f;
+     background: transparent;
+     color: var(--lime);
+     padding: 8px 11px;
+     cursor: pointer;
+     font: 10px var(--mono);
+ }
+
+ .register_trigger:hover {
+     background: #30372b;
+ }
+
+ @media (max-width: 520px) {
+     .topbar {
+         height: 60px;
+     }
+
+     .online_text {
+         display: none;
+     }
+ }
