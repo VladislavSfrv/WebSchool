@@ -1,9 +1,16 @@
-import { BookOpen, ChevronDown, LayoutDashboard, Users } from "lucide-react";
+import { BookOpen, LayoutDashboard, LogOut, Users } from "lucide-react";
 import styles from './sidebar.module.css'
 import { NavLink } from "react-router-dom";
 import { routes } from "../../lib/constants";
+import type { AuthUser } from "../../lib/authSession";
 
-export function Sidebar() {
+type SidebarProps = {
+  user: AuthUser;
+  onLogout: () => void;
+};
+
+export function Sidebar({ user, onLogout }: SidebarProps) {
+  const initials = user.fullName.trim().split(/\s+/).slice(0, 2).map((part) => part[0]).join("").toUpperCase();
   return (
     <aside className={styles.sidebar}>
       <a className={styles.brand} href="#top">
@@ -34,12 +41,14 @@ export function Sidebar() {
         </p>
       </div>
       <div className={styles.sidebar_bottom}>
-        <span className={styles.avatar}>ВС</span>
-        <span>
-          <strong>Владислав С.</strong>
-          <small>Студент</small>
+        <span className={styles.avatar}>{initials}</span>
+        <span className={styles.user_details}>
+          <strong>{user.fullName}</strong>
+          <small>{user.email}</small>
         </span>
-        <ChevronDown size={15} />
+        <button className={styles.logout_button} type="button" onClick={onLogout} aria-label="Выйти">
+          <LogOut size={15} />
+        </button>
       </div>
     </aside>
   );

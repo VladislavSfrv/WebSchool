@@ -1,8 +1,8 @@
-import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+import { registrationApiPlugin } from './vite.api.ts';
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  base: '/WebSchool/'
-})
+  plugins: [react(), registrationApiPlugin()],
+  base: '/WebSchool/',
+});

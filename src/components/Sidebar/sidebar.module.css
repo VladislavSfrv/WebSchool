@@ -145,6 +145,34 @@
     font: 700 10px var(--mono);
 }
 
+.user_details {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.user_details strong,
+.user_details small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.logout_button {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    border: 0;
+    padding: 6px;
+    background: transparent;
+    color: #888e85;
+    cursor: pointer;
+}
+
+.logout_button:hover {
+    color: var(--lime);
+}
+
 @media (max-width: 850px) {
     .sidebar {
         width: 70px;

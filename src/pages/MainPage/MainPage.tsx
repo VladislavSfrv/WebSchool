@@ -3,11 +3,13 @@ import { CommunitySection } from '../../components/CommunitySection'
 import { CourseSection } from '../../components/CourseSection'
 import { DashboardIntro } from '../../components/DashboardIntro'
 import { Header } from '../../components/Header'
+import type { AuthUser } from '../../lib/authSession'
 import type { Course } from '../../types'
 import styles from './mainPage.module.css'
 
 interface MainPageProps {
-    setIsRegistrationOpen(isRegistrationOpen: boolean): void;
+    user: AuthUser;
+    onLogout(): void;
 }
 
 const courses: Course[] = [
@@ -37,7 +39,7 @@ const courses: Course[] = [
     },
 ];
 
-export const MainPage = ({ setIsRegistrationOpen }: MainPageProps) => {
+export const MainPage = ({ user, onLogout }: MainPageProps) => {
     const [activeFilter, setActiveFilter] = useState("Все курсы");
     const [query, setQuery] = useState("");
     const filters = ["Все курсы", "В процессе", "Для старта"];
@@ -55,8 +57,8 @@ export const MainPage = ({ setIsRegistrationOpen }: MainPageProps) => {
     return (
         <>
             <section className={styles.content} id="top">
-                <Header onRegister={() => setIsRegistrationOpen(true)} />
-                <DashboardIntro />
+                <Header onLogout={onLogout} />
+                <DashboardIntro user={user} />
                 <CourseSection
                     courses={visibleCourses}
                     activeFilter={activeFilter}

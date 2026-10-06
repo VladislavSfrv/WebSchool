@@ -1,13 +1,19 @@
 import { ArrowUpRight, Check, Sparkles } from "lucide-react";
+import type { AuthUser } from "../../lib/authSession";
 import styles from "./dashboardIntro.module.css";
 
-export function DashboardIntro() {
+type DashboardIntroProps = {
+  user: AuthUser;
+};
+
+export function DashboardIntro({ user }: DashboardIntroProps) {
+  const firstName = user.fullName.trim().split(/\s+/)[0];
   return (
     <div className={styles.dashboard} id="dashboard">
       <section className={styles.welcome_block}>
         <p className="eyebrow">СРЕДА, 24 СЕНТЯБРЯ</p>
         <h1>
-          Привет, Владислав<span className={styles.sun}>✳</span>
+          Привет, {firstName}<span className={styles.sun}>✳</span>
         </h1>
         <p className={styles.welcome_copy}>
           Продолжим превращать идеи
