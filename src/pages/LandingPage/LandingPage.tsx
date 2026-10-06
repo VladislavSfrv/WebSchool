@@ -1,8 +1,14 @@
-import { ArrowRight, CheckCircle2, Play, Sparkles, Star, Users } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowLeft, ArrowRight, CheckCircle2, Play, Sparkles, Star, Users } from 'lucide-react';
+import type { AuthUser } from '../../lib/authSession';
 import styles from './landingPage.module.css';
 
 interface LandingPageProps {
   onRegister: () => void;
+  onLogin: () => void;
+  user?: AuthUser;
+  onOpenWorkspace?: () => void;
+  onLogout?: () => void;
 }
 
 const stats = [
@@ -17,10 +23,40 @@ const benefits = [
   'Комьюнити с единомышленниками',
 ];
 
-const roadmap = [
-  { step: '01', title: 'Фундамент', text: 'HTML, CSS, JavaScript и архитектура интерфейсов.' },
-  { step: '02', title: 'React', text: 'Компоненты, состояние, маршрутизация и работа с данными.' },
-  { step: '03', title: 'Портфолио', text: 'Собираете проекты, которые можно показать работодателю.' },
+const courseRoadmaps = [
+  {
+    title: 'Frontend Start',
+    duration: '8 недель',
+    lessons: 32,
+    modules: [
+      { number: '01', title: 'Веб-основы', text: 'HTML, CSS, доступность и адаптивная верстка.', project: 'Сайт профиля' },
+      { number: '02', title: 'JavaScript', text: 'Переменные, функции, DOM, события и асинхронность.', project: 'Тodo для командной строки' },
+      { number: '03', title: 'UI и UX', text: 'Компоненты, цвета, типографика, фокус и пользовательские сценарии.', project: 'Интерфейс интернет-магазина' },
+      { number: '04', title: 'Проект', text: 'Построите полноценное приложение и подготовьте его к демонстрации.', project: 'Собственный продукт' },
+    ],
+  },
+  {
+    title: 'React Pro',
+    duration: '10 недель',
+    lessons: 40,
+    modules: [
+      { number: '01', title: 'React в практике', text: 'Компоненты, JSX, props, состояние и lifecycle.', project: 'Дашборд задач' },
+      { number: '02', title: 'Hooks и данные', text: 'useState, useEffect, useMemo, контекст и API.', project: 'Панель управления данными' },
+      { number: '03', title: 'Маршрутизация', text: 'Маршруты, защищённые страницы и навигация.', project: 'Мультипагинный сайт' },
+      { number: '04', title: 'Производство', text: 'Оптимизация, тесты, ошибки и подготовка к публике.', project: 'Портфолио-проект' },
+    ],
+  },
+  {
+    title: 'Career Boost',
+    duration: '6 недель',
+    lessons: 24,
+    modules: [
+      { number: '01', title: 'Навыки работодателя', text: 'Git, TypeScript, REST API и современные инструменты.', project: 'API-клиент' },
+      { number: '02', title: 'Архитектура', text: 'Модульность, типы, состояние и масштабируемые интерфейсы.', project: 'Компонентная библиотека' },
+      { number: '03', title: 'Тестирование', text: 'Unit, integration и E2E-тесты для реального продукта.', project: 'Тестируемое приложение' },
+      { number: '04', title: 'Career package', text: 'Рефакторинг, резюме, представление проекта и собеседование.', project: 'Готовый к публике продукт' },
+    ],
+  },
 ];
 
 const programs = [
@@ -29,7 +65,48 @@ const programs = [
   { title: 'Career Boost', tag: 'продвинутый', text: 'Подготовка к собеседованию и разработка сильного портфолио.', accent: 'sky' },
 ];
 
-export function LandingPage({ onRegister }: LandingPageProps) {
+const reviews = [
+  {
+    quote: 'Мне хватило двух месяцев, чтобы перейти от верстки по макетам к работе над своими проектами.',
+    name: 'Анастасия Н.',
+    role: 'Frontend Developer',
+    initials: 'АН',
+  },
+  {
+    quote: 'Курс дал понятную структуру, а проекты помогли собрать портфолио, которое действительно можно показать.',
+    name: 'Дмитрий К.',
+    role: 'Junior Frontend Developer',
+    initials: 'ДК',
+  },
+  {
+    quote: 'Спасибо за понятный фидбек. Я смог исправлять ошибки раньше и лучше понимать, как писать maintainable-код.',
+    name: 'Мария С.',
+    role: 'Product Designer',
+    initials: 'МС',
+  },
+  {
+    quote: 'После курса я могу confidently говорить о React, TypeScript и соблазне делать полноценные интерфейсы.',
+    name: 'Николай П.',
+    role: 'Frontend Engineer',
+    initials: 'НП',
+  },
+];
+
+export function LandingPage({ onRegister, onLogin, user, onOpenWorkspace, onLogout }: LandingPageProps) {
+  const [selectedCourse, setSelectedCourse] = useState(courseRoadmaps[0].title);
+  const [activeReview, setActiveReview] = useState(0);
+  const activeRoadmap = courseRoadmaps.find((course) => course.title === selectedCourse) ?? courseRoadmaps[0];
+  const review = reviews[activeReview];
+  const firstName = user?.fullName.trim().split(/\s+/)[0];
+
+  const showPreviousReview = () => {
+    setActiveReview((current) => (current - 1 + reviews.length) % reviews.length);
+  };
+
+  const showNextReview = () => {
+    setActiveReview((current) => (current + 1) % reviews.length);
+  };
+
   return (
     <div className={styles.page}>
       <header className={styles.topbar}>
@@ -42,30 +119,60 @@ export function LandingPage({ onRegister }: LandingPageProps) {
           <a href="#benefits">Преимущества</a>
           <a href="#reviews">Отзывы</a>
         </nav>
-        <button type="button" className={styles.primaryAction} onClick={onRegister}>
-          Начать бесплатно
-        </button>
+        {user ? (
+          <>
+            <button type="button" className={styles.secondaryAction} onClick={onLogout}>
+              Выйти
+            </button>
+            <button type="button" className={styles.primaryAction} onClick={onOpenWorkspace}>
+              Мой кабинет
+            </button>
+          </>
+        ) : (
+          <>
+            <button type="button" className={styles.secondaryAction} onClick={onLogin}>
+              Войти
+            </button>
+            <button type="button" className={styles.primaryAction} onClick={onRegister}>
+              Начать бесплатно
+            </button>
+          </>
+        )}
       </header>
 
       <main className={styles.hero}>
         <div className={styles.heroCopy}>
-          <p className="eyebrow">FRONTEND ШКОЛА</p>
+          <p className="eyebrow">{user ? 'ТВОЙ ПУТЬ В CODEFOLK' : 'FRONTEND ШКОЛА'}</p>
           <h1>
-            Создавай интерфейсы,
-            <span> которые хочется открывать снова.</span>
+            {user ? `Привет, ${firstName}.` : 'Создавай интерфейсы,'}
+            <span>{user ? ' Продолжим учиться?' : ' которые хочется открывать снова.'}</span>
           </h1>
           <p className={styles.lead}>
-            Обучение для тех, кто хочет быстро войти в web-разработку, строить понятные
-            интерфейсы и создавать продукты, которые реально ценят.
+            {user
+              ? 'Твои курсы, новые навыки и проекты уже ждут. Продолжай в своём темпе.'
+              : 'Обучение для тех, кто хочет быстро войти в web-разработку, строить понятные интерфейсы и создавать продукты, которые реально ценят.'}
           </p>
 
           <div className={styles.actions}>
-            <button type="button" className={styles.primaryAction} onClick={onRegister}>
-              Записаться на курс <ArrowRight size={18} />
-            </button>
-            <button type="button" className={styles.secondaryAction}>
-              <Play size={15} /> Смотреть программу
-            </button>
+            {user ? (
+              <>
+                <button type="button" className={styles.primaryAction} onClick={onOpenWorkspace}>
+                  Продолжить обучение <ArrowRight size={18} />
+                </button>
+                <a className={styles.secondaryAction} href="#programs">
+                  <Play size={15} /> Смотреть программу
+                </a>
+              </>
+            ) : (
+              <>
+                <button type="button" className={styles.primaryAction} onClick={onRegister}>
+                  Записаться на курс <ArrowRight size={18} />
+                </button>
+                <a className={styles.secondaryAction} href="#programs">
+                  <Play size={15} /> Смотреть программу
+                </a>
+              </>
+            )}
           </div>
 
           <ul className={styles.benefitsList}>
@@ -148,40 +255,89 @@ export function LandingPage({ onRegister }: LandingPageProps) {
               <span className={styles.courseTag}>{program.tag}</span>
               <h3>{program.title}</h3>
               <p>{program.text}</p>
-              <button type="button" className={styles.textButton} onClick={onRegister}>
-                Узнать детали <ArrowRight size={16} />
+              <button
+                type="button"
+                className={styles.textButton}
+                onClick={() => setSelectedCourse(program.title)}
+                aria-pressed={selectedCourse === program.title}
+              >
+                {selectedCourse === program.title ? 'Показать roadmap' : 'Получить roadmap'} <ArrowRight size={16} />
               </button>
             </article>
           ))}
         </div>
       </section>
 
-      <section className={styles.section}>
-        <div className={styles.sectionHeading}>
-          <p className="eyebrow">КАК ПРОХОДИТ ОБУЧЕНИЕ</p>
-          <h2>Практика, поддержка и ясная структура.</h2>
+      <section className={styles.roadmapSection} id="roadmap">
+        <div className={styles.roadmapIntro}>
+          <p className="eyebrow">ROADMAP COURSE</p>
+          <h2>Путь обучения: {activeRoadmap.title}</h2>
+          <p>
+            {activeRoadmap.duration} · {activeRoadmap.lessons} уроков · 4 этапа · итоговый проект
+          </p>
         </div>
 
-        <div className={styles.stepsGrid}>
-          {roadmap.map((step) => (
-            <article key={step.step} className={styles.stepCard}>
-              <span className={styles.stepNumber}>{step.step}</span>
-              <h3>{step.title}</h3>
-              <p>{step.text}</p>
+        <div className={styles.roadmapTrack}>
+          {activeRoadmap.modules.map((module) => (
+            <article key={module.number} className={styles.roadmapModule}>
+              <div className={styles.moduleHeader}>
+                <span>{module.number}</span>
+                <div>
+                  <h3>{module.title}</h3>
+                  <p>{module.text}</p>
+                </div>
+              </div>
+              <div className={styles.projectBlock}>
+                <span>Итоговый проект</span>
+                <strong>{module.project}</strong>
+              </div>
             </article>
           ))}
         </div>
+
+        <button type="button" className={styles.primaryAction} onClick={onRegister}>
+          Начать {activeRoadmap.title} <ArrowRight size={18} />
+        </button>
       </section>
 
       <section className={styles.reviewSection} id="reviews">
-        <div className={styles.reviewCard}>
-          <p className="eyebrow">ОТЗЫВЫ</p>
-          <h2>«Мне хватило двух месяцев, чтобы перейти от верстки по макетам к работе над своими проектами.»</h2>
-          <div className={styles.reviewer}>
-            <span className={styles.avatar}>АН</span>
-            <div>
-              <strong>Анастасия Н.</strong>
-              <small>Frontend Developer</small>
+        <div className={styles.reviewCard} aria-live="polite">
+          <div className={styles.reviewHeader}>
+            <p className="eyebrow">ОТЗЫВЫ</p>
+            <span className={styles.reviewCount}>
+              {activeReview + 1} / {reviews.length}
+            </span>
+          </div>
+          <div className={styles.reviewContent} key={activeReview}>
+            <h2>«{review.quote}»</h2>
+            <div className={styles.reviewer}>
+              <span className={styles.avatar}>{review.initials}</span>
+              <div>
+                <strong>{review.name}</strong>
+                <small>{review.role}</small>
+              </div>
+            </div>
+          </div>
+          <div className={styles.reviewControls}>
+            <div className={styles.reviewDots} aria-label="Выберите отзыв">
+              {reviews.map((item, index) => (
+                <button
+                  key={item.name}
+                  type="button"
+                  className={`${styles.reviewDot} ${index === activeReview ? styles.active : ''}`}
+                  onClick={() => setActiveReview(index)}
+                  aria-label={`Показать отзыв ${index + 1}`}
+                  aria-current={index === activeReview ? 'true' : undefined}
+                />
+              ))}
+            </div>
+            <div className={styles.reviewArrows}>
+              <button type="button" onClick={showPreviousReview} aria-label="Предыдущий отзыв">
+                <ArrowLeft size={18} />
+              </button>
+              <button type="button" onClick={showNextReview} aria-label="Следующий отзыв">
+                <ArrowRight size={18} />
+              </button>
             </div>
           </div>
         </div>
@@ -192,8 +348,12 @@ export function LandingPage({ onRegister }: LandingPageProps) {
           <p className="eyebrow">Готов начать?</p>
           <h2>Выбери свой путь и начни уже сегодня.</h2>
         </div>
-        <button type="button" className={styles.primaryAction} onClick={onRegister}>
-          Создать аккаунт <ArrowRight size={18} />
+        <button
+          type="button"
+          className={styles.primaryAction}
+          onClick={user ? onOpenWorkspace : onRegister}
+        >
+          {user ? 'Открыть кабинет' : 'Создать аккаунт'} <ArrowRight size={18} />
         </button>
       </section>
     </div>

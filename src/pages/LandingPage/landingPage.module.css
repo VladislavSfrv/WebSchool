@@ -20,6 +20,7 @@
   border-radius: 18px;
   background: rgba(27, 28, 27, 0.82);
   backdrop-filter: blur(8px);
+  animation: fade-up 0.7s ease both;
 }
 
 .brand {
@@ -105,6 +106,10 @@
   padding: 24px 0 56px;
 }
 
+.heroCopy {
+  animation: fade-up 0.8s 0.12s ease both;
+}
+
 .heroCopy h1 {
   margin: 18px 0 18px;
   font-size: clamp(2.8rem, 5vw, 5rem);
@@ -158,6 +163,7 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: linear-gradient(180deg, rgba(27, 28, 27, 0.92), rgba(16, 17, 17, 0.92));
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28);
+  animation: card-enter 0.9s 0.24s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 .cardHeader {
@@ -231,9 +237,20 @@
 }
 
 .previewBox {
+  position: relative;
+  overflow: hidden;
   height: 120px;
   border-radius: 18px;
   background: linear-gradient(135deg, rgba(202, 255, 72, 0.9), rgba(120, 160, 255, 0.8));
+}
+
+.previewBox::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-120%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  animation: shimmer 3.2s 1.2s ease-in-out infinite;
 }
 
 .previewLine,
@@ -307,6 +324,7 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   background: rgba(19, 20, 20, 0.8);
+  animation: fade-up 0.7s 0.42s ease both;
 }
 
 .metricsStrip div {
@@ -337,21 +355,32 @@
   letter-spacing: -0.06em;
 }
 
-.programGrid,
-.stepsGrid {
+.programGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
 }
 
-.programCard,
-.stepCard {
+.programCard {
   position: relative;
   overflow: hidden;
   padding: 24px 22px;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(27, 28, 27, 0.9);
+  animation: fade-up 0.65s ease both;
+}
+
+.programCard:nth-child(1) {
+  animation-delay: 0.08s;
+}
+
+.programCard:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.programCard:nth-child(3) {
+  animation-delay: 0.28s;
 }
 
 .programCard.lime {
@@ -377,15 +406,13 @@
   text-transform: uppercase;
 }
 
-.programCard h3,
-.stepCard h3 {
+.programCard h3 {
   margin: 18px 0 10px;
   font-size: 1.7rem;
   letter-spacing: -0.05em;
 }
 
-.programCard p,
-.stepCard p {
+.programCard p {
   margin: 0;
   line-height: 1.7;
   color: #bbb5a1;
@@ -401,18 +428,111 @@
   padding: 0;
 }
 
-.stepNumber {
+.roadmapSection {
+  width: min(1200px, 100%);
+  margin: 88px auto 0;
+  padding: 36px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(27, 28, 27, 0.94), rgba(17, 18, 18, 0.94));
+  animation: fade-up 0.7s 0.5s ease both;
+}
+
+.roadmapIntro h2 {
+  margin: 10px 0 8px;
+  font-size: clamp(2rem, 3.5vw, 3.3rem);
+  letter-spacing: -0.06em;
+}
+
+.roadmapIntro > p:last-child {
+  margin: 0;
+  color: #aaa69b;
+}
+
+.roadmapTrack {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 32px 0;
+}
+
+.roadmapModule {
+  padding: 22px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(13, 14, 14, 0.58);
+  animation: module-enter 0.55s ease both;
+}
+
+.roadmapModule:nth-child(1) {
+  animation-delay: 0.06s;
+}
+
+.roadmapModule:nth-child(2) {
+  animation-delay: 0.14s;
+}
+
+.roadmapModule:nth-child(3) {
+  animation-delay: 0.22s;
+}
+
+.roadmapModule:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.moduleHeader {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+}
+
+.moduleHeader > span {
   display: inline-flex;
-  justify-content: center;
   align-items: center;
-  width: 52px;
-  height: 52px;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
   border-radius: 14px;
   background: rgba(202, 255, 72, 0.1);
   color: #d6ff85;
-  font-size: 0.9rem;
-  letter-spacing: 0.12em;
+  font-family: var(--mono);
   font-weight: 700;
+}
+
+.moduleHeader h3 {
+  margin: 2px 0 8px;
+  font-size: 1.35rem;
+  letter-spacing: -0.04em;
+}
+
+.moduleHeader p {
+  margin: 0;
+  color: #aaa69b;
+  line-height: 1.6;
+}
+
+.projectBlock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.projectBlock span {
+  color: #777b73;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.projectBlock strong {
+  text-align: right;
+  color: #e6e2d7;
+  font-size: 0.85rem;
 }
 
 .reviewSection {
@@ -425,12 +545,34 @@
   border-radius: 28px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: linear-gradient(135deg, rgba(202, 255, 72, 0.08), rgba(21, 22, 21, 0.9));
+  animation: fade-up 0.7s 0.58s ease both;
+}
+
+.reviewHeader,
+.reviewControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.reviewCount {
+  color: #8f948a;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+}
+
+.reviewContent {
+  min-height: 210px;
+  animation: review-in 0.42s ease both;
 }
 
 .reviewCard h2 {
   margin: 12px 0 28px;
   max-width: 860px;
   font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.15;
   letter-spacing: -0.06em;
 }
 
@@ -462,6 +604,53 @@
   color: #b9b5a9;
 }
 
+.reviewDots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reviewDot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: width 0.25s ease, background 0.25s ease;
+}
+
+.reviewDot.active {
+  width: 28px;
+  background: #caff48;
+}
+
+.reviewArrows {
+  display: flex;
+  gap: 8px;
+}
+
+.reviewArrows button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  color: #f1f0e9;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.reviewArrows button:hover {
+  border-color: rgba(202, 255, 72, 0.55);
+  background: rgba(202, 255, 72, 0.1);
+  transform: translateY(-2px);
+}
+
 .ctaSection {
   width: min(1200px, 100%);
   margin: 88px auto 0;
@@ -473,6 +662,7 @@
   border-radius: 28px;
   background: linear-gradient(90deg, rgba(202, 255, 72, 0.12), rgba(19, 20, 19, 0.9));
   border: 1px solid rgba(202, 255, 72, 0.2);
+  animation: fade-up 0.7s 0.66s ease both;
 }
 
 .ctaSection h2 {
@@ -489,7 +679,7 @@
 
   .hero,
   .programGrid,
-  .stepsGrid,
+  .roadmapTrack,
   .metricsStrip,
   .ctaSection {
     grid-template-columns: 1fr;
@@ -516,6 +706,19 @@
     padding-right: 18px;
   }
 
+  .roadmapSection {
+    padding: 24px 18px;
+  }
+
+  .projectBlock {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .projectBlock strong {
+    text-align: left;
+  }
+
   .topbar {
     padding: 16px 18px;
   }
@@ -538,5 +741,69 @@
 
   .metricsRow {
     grid-template-columns: 1fr;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(36px) rotateY(-5deg) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateY(0) scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0%, 20% {
+    transform: translateX(-120%);
+  }
+  70%, 100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes module-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes review-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

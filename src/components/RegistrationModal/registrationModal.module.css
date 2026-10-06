@@ -105,6 +105,22 @@
      border-color: var(--lime);
  }
 
+.registration_form input[aria-invalid='true'] {
+    border-color: #ff7b72;
+}
+
+.field_error,
+.submit_error {
+    display: block;
+    margin-top: 6px;
+    color: #ff9b95;
+    font: 11px/1.4 var(--mono);
+}
+
+.submit_error {
+    margin-bottom: 14px;
+}
+
  .password_field input {
      flex: 1;
      min-width: 0;
@@ -152,6 +168,11 @@
      font: 700 12px var(--heading);
      cursor: pointer;
  }
+
+.submit_button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
 
  .submit_button:hover,
  .primary_button:hover {
