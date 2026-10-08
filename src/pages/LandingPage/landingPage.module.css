@@ -8,6 +8,11 @@
   color: #f1f0e9;
 }
 
+.buttons{
+  display: flex;
+  gap: 10px;
+}
+
 .topbar {
   width: min(1200px, 100%);
   margin: 0 auto 32px;

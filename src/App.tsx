@@ -7,6 +7,7 @@ import { Sidebar } from "./components/Sidebar";
 import { clearAuthUser, loadAuthUser, saveAuthUser, type AuthUser } from "./lib/authSession";
 import { LandingPage } from "./pages/LandingPage";
 import { MainPage } from "./pages/MainPage";
+import { ProfilePage } from "./pages/ProfilePage";
 
 function App() {
     const [user, setUser] = useState<AuthUser | null>(() => loadAuthUser());
@@ -15,7 +16,7 @@ function App() {
     const location = useLocation();
     const navigate = useNavigate();
     const isAuthenticated = user !== null;
-    const isWorkspace = location.pathname === "/workspace";
+    const isWorkspace = location.pathname === "/workspace" || location.pathname === "/profile";
 
     const handleAuthenticationSuccess = (authenticatedUser: AuthUser) => {
         saveAuthUser(authenticatedUser);
@@ -61,6 +62,16 @@ function App() {
                     element={
                         isAuthenticated ? (
                             <MainPage user={user} onLogout={handleLogout} />
+                        ) : (
+                            <LandingPage onRegister={openRegistration} onLogin={openLogin} />
+                        )
+                    }
+                />
+                <Route
+                    path="/profile"
+                    element={
+                        isAuthenticated ? (
+                            <ProfilePage user={user} onLogout={handleLogout} />
                         ) : (
                             <LandingPage onRegister={openRegistration} onLogin={openLogin} />
                         )
