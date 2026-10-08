@@ -120,23 +120,23 @@ export function LandingPage({ onRegister, onLogin, user, onOpenWorkspace, onLogo
           <a href="#reviews">Отзывы</a>
         </nav>
         {user ? (
-          <>
+          <div className={styles.buttons}>
             <button type="button" className={styles.secondaryAction} onClick={onLogout}>
               Выйти
             </button>
             <button type="button" className={styles.primaryAction} onClick={onOpenWorkspace}>
               Мой кабинет
             </button>
-          </>
+          </div>
         ) : (
-          <>
+          <div className={styles.buttons}>
             <button type="button" className={styles.secondaryAction} onClick={onLogin}>
               Войти
             </button>
             <button type="button" className={styles.primaryAction} onClick={onRegister}>
               Начать бесплатно
             </button>
-          </>
+          </div>
         )}
       </header>
 
